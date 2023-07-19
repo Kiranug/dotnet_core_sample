@@ -33,6 +33,11 @@ jobs:
         with:
           name: .net-app
           path: ${{env.DOTNET_ROOT}}/myapp
+          
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
 
   deploy:
     runs-on: windows-latest
@@ -53,5 +58,5 @@ jobs:
         with:
           app-name: 'demo-app-web1'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_EC4F3997322647CE999E1D5378FA17E1 }}
+          publish-profile: ${{ secrets.AZURE_CREDENTIALS }}
           package: .
